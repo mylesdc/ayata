@@ -127,3 +127,41 @@ export function updateTokenDayData(token: Token, event: EthereumEvent): TokenDay
 
   return tokenDayData as TokenDayData
 }
+
+export function updateTokenHourData(token: Token, event: EthereumEvent): TokenHourData {
+  let bundle = Bundle.load('1')
+  let timestamp = event.block.timestamp.toI32()
+  let HourID = timestamp / 3600
+  let HourStartTimestamp = HourID * 3600
+  let tokenHourID = token.id
+    .toString()
+    .concat('-')
+    .concat(BigInt.fromI32(HourID).toString())
+
+  let tokenHourData = TokenHourData.load(tokenHourID)
+  if (tokenHourData === null) {
+    tokenHourData = new TokenHourData(tokenHourID)
+    tokenHourData.date = HourStartTimestamp
+    tokenHourData.token = token.id
+    tokenHourData.priceUSD = token.derivedETH.times(bundle.ethPrice)
+    tokenHourData.dailyVolumeToken = ZERO_BD
+    tokenHourData.dailyVolumeETH = ZERO_BD
+    tokenHourData.dailyVolumeUSD = ZERO_BD
+    tokenHourData.dailyTxns = ZERO_BI
+    tokenHourData.totalLiquidityUSD = ZERO_BD
+  }
+  tokenHourData.priceUSD = token.derivedETH.times(bundle.ethPrice)
+  tokenHourData.totalLiquidityToken = token.totalLiquidity
+  tokenHourData.totalLiquidityETH = token.totalLiquidity.times(token.derivedETH as BigDecimal)
+  tokenHourData.totalLiquidityUSD = tokenHourData.totalLiquidityETH.times(bundle.ethPrice)
+  tokenHourData.dailyTxns = tokenHourData.dailyTxns.plus(ONE_BI)
+  tokenHourData.save()
+
+  /**
+   * @todo test if this speeds up sync
+   */
+  // updateStoredTokens(tokenHourData as TokenHourData, HourID)
+  // updateStoredPairs(tokenHourData as TokenHourData, HourPairID)
+
+  return tokenHourData as TokenHourData
+}

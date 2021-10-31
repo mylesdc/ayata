@@ -1,6 +1,6 @@
 specVersion: 0.0.2
 description: Modified Uniswap V2 Subgraph to include token hour data (tokenHourData)
-repository: https://github.com/mylesdc/uniswap-v2-subgraph
+repository: https://github.com/mylesdc/ayata
 schema:
   file: ./schema.graphql
 dataSources:

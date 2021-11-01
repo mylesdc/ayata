@@ -264,6 +264,15 @@ export class Token extends Entity {
     this.set("tokenDayData", Value.fromStringArray(value));
   }
 
+  get tokenHourData(): Array<string> {
+    let value = this.get("tokenHourData");
+    return value!.toStringArray();
+  }
+
+  set tokenHourData(value: Array<string>) {
+    this.set("tokenHourData", Value.fromStringArray(value));
+  }
+
   get pairDayDataBase(): Array<string> {
     let value = this.get("pairDayDataBase");
     return value!.toStringArray();
@@ -2017,6 +2026,140 @@ export class TokenDayData extends Entity {
 
   static load(id: string): TokenDayData | null {
     return changetype<TokenDayData | null>(store.get("TokenDayData", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get date(): i32 {
+    let value = this.get("date");
+    return value!.toI32();
+  }
+
+  set date(value: i32) {
+    this.set("date", Value.fromI32(value));
+  }
+
+  get token(): string {
+    let value = this.get("token");
+    return value!.toString();
+  }
+
+  set token(value: string) {
+    this.set("token", Value.fromString(value));
+  }
+
+  get dailyVolumeToken(): BigDecimal {
+    let value = this.get("dailyVolumeToken");
+    return value!.toBigDecimal();
+  }
+
+  set dailyVolumeToken(value: BigDecimal) {
+    this.set("dailyVolumeToken", Value.fromBigDecimal(value));
+  }
+
+  get dailyVolumeETH(): BigDecimal {
+    let value = this.get("dailyVolumeETH");
+    return value!.toBigDecimal();
+  }
+
+  set dailyVolumeETH(value: BigDecimal) {
+    this.set("dailyVolumeETH", Value.fromBigDecimal(value));
+  }
+
+  get dailyVolumeUSD(): BigDecimal {
+    let value = this.get("dailyVolumeUSD");
+    return value!.toBigDecimal();
+  }
+
+  set dailyVolumeUSD(value: BigDecimal) {
+    this.set("dailyVolumeUSD", Value.fromBigDecimal(value));
+  }
+
+  get dailyTxns(): BigInt {
+    let value = this.get("dailyTxns");
+    return value!.toBigInt();
+  }
+
+  set dailyTxns(value: BigInt) {
+    this.set("dailyTxns", Value.fromBigInt(value));
+  }
+
+  get totalLiquidityToken(): BigDecimal {
+    let value = this.get("totalLiquidityToken");
+    return value!.toBigDecimal();
+  }
+
+  set totalLiquidityToken(value: BigDecimal) {
+    this.set("totalLiquidityToken", Value.fromBigDecimal(value));
+  }
+
+  get totalLiquidityETH(): BigDecimal {
+    let value = this.get("totalLiquidityETH");
+    return value!.toBigDecimal();
+  }
+
+  set totalLiquidityETH(value: BigDecimal) {
+    this.set("totalLiquidityETH", Value.fromBigDecimal(value));
+  }
+
+  get totalLiquidityUSD(): BigDecimal {
+    let value = this.get("totalLiquidityUSD");
+    return value!.toBigDecimal();
+  }
+
+  set totalLiquidityUSD(value: BigDecimal) {
+    this.set("totalLiquidityUSD", Value.fromBigDecimal(value));
+  }
+
+  get priceUSD(): BigDecimal {
+    let value = this.get("priceUSD");
+    return value!.toBigDecimal();
+  }
+
+  set priceUSD(value: BigDecimal) {
+    this.set("priceUSD", Value.fromBigDecimal(value));
+  }
+}
+
+export class TokenHourData extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+
+    this.set("date", Value.fromI32(0));
+    this.set("token", Value.fromString(""));
+    this.set("dailyVolumeToken", Value.fromBigDecimal(BigDecimal.zero()));
+    this.set("dailyVolumeETH", Value.fromBigDecimal(BigDecimal.zero()));
+    this.set("dailyVolumeUSD", Value.fromBigDecimal(BigDecimal.zero()));
+    this.set("dailyTxns", Value.fromBigInt(BigInt.zero()));
+    this.set("totalLiquidityToken", Value.fromBigDecimal(BigDecimal.zero()));
+    this.set("totalLiquidityETH", Value.fromBigDecimal(BigDecimal.zero()));
+    this.set("totalLiquidityUSD", Value.fromBigDecimal(BigDecimal.zero()));
+    this.set("priceUSD", Value.fromBigDecimal(BigDecimal.zero()));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save TokenHourData entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        "Cannot save TokenHourData entity with non-string ID. " +
+          'Considering using .toHex() to convert the "id" to a string.'
+      );
+      store.set("TokenHourData", id.toString(), this);
+    }
+  }
+
+  static load(id: string): TokenHourData | null {
+    return changetype<TokenHourData | null>(store.get("TokenHourData", id));
   }
 
   get id(): string {

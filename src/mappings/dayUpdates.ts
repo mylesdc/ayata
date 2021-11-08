@@ -1,9 +1,10 @@
 /* eslint-disable prefer-const */
 import { BigDecimal, BigInt, EthereumEvent } from '@graphprotocol/graph-ts'
-import { Bundle, Pair, PairDayData, Token, TokenDayData, TokenHourData, UniswapDayData, UniswapFactory } from '../types/schema'
+import { Bundle, Pair, Token, TokenHourData, UniswapFactory } from '../types/schema'
 import { PairHourData } from './../types/schema'
 import { FACTORY_ADDRESS, ONE_BI, ZERO_BD, ZERO_BI } from './helpers'
 
+/*
 export function updateUniswapDayData(event: EthereumEvent): UniswapDayData {
   let uniswap = UniswapFactory.load(FACTORY_ADDRESS)
   let timestamp = event.block.timestamp.toI32()
@@ -59,6 +60,7 @@ export function updatePairDayData(event: EthereumEvent): PairDayData {
 
   return pairDayData as PairDayData
 }
+*/
 
 export function updatePairHourData(event: EthereumEvent): PairHourData {
   let timestamp = event.block.timestamp.toI32()
@@ -89,7 +91,7 @@ export function updatePairHourData(event: EthereumEvent): PairHourData {
 
   return pairHourData as PairHourData
 }
-
+/*
 export function updateTokenDayData(token: Token, event: EthereumEvent): TokenDayData {
   let bundle = Bundle.load('1')
   let timestamp = event.block.timestamp.toI32()
@@ -121,12 +123,13 @@ export function updateTokenDayData(token: Token, event: EthereumEvent): TokenDay
 
   /**
    * @todo test if this speeds up sync
-   */
+  //
   // updateStoredTokens(tokenDayData as TokenDayData, dayID)
   // updateStoredPairs(tokenDayData as TokenDayData, dayPairID)
 
   return tokenDayData as TokenDayData
 }
+*/
 
 export function updateTokenHourData(token: Token, event: EthereumEvent): TokenHourData {
   let bundle = Bundle.load('1')

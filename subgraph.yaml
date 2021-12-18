@@ -13,7 +13,7 @@ dataSources:
       startBlock: 10000834
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.3
+      apiVersion: 0.0.4
       language: wasm/assemblyscript
       file: ./src/mappings/factory.ts
       entities:
@@ -39,7 +39,7 @@ templates:
       abi: Pair
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.3
+      apiVersion: 0.0.4
       language: wasm/assemblyscript
       file: ./src/mappings/core.ts
       entities:
@@ -51,13 +51,13 @@ templates:
         - name: Factory
           file: ./abis/factory.json
       eventHandlers:
-        - event: Mint(indexed address,uint256,uint256)
-          handler: handleMint
-        - event: Burn(indexed address,uint256,uint256,indexed address)
-          handler: handleBurn
-        - event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address)
-          handler: handleSwap
-        - event: Transfer(indexed address,indexed address,uint256)
-          handler: handleTransfer
+        #- event: Mint(indexed address,uint256,uint256)
+        #  handler: handleMint
+        #- event: Burn(indexed address,uint256,uint256,indexed address)
+        #  handler: handleBurn
+        #- event: Swap(indexed address,uint256,uint256,uint256,uint256,indexed address)
+        #  handler: handleSwap
+        #- event: Transfer(indexed address,indexed address,uint256)
+        #  handler: handleTransfer
         - event: Sync(uint112,uint112)
           handler: handleSync

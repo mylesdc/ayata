@@ -231,6 +231,12 @@ export function handleSync(event: Sync): void {
   if (pair.reserve0.notEqual(ZERO_BD)) pair.token1Price = pair.reserve1.div(pair.reserve0)
   else pair.token1Price = ZERO_BD
 
+  pair.volumeUSD = pair.volumeUSD
+  pair.volumeToken0 = pair.volumeToken0
+  pair.volumeToken1 = pair.volumeToken1
+  pair.untrackedVolumeUSD = pair.untrackedVolumeUSD
+  pair.txCount = pair.txCount.plus(ONE_BI)
+
   pair.save()
 
   // update ETH price now that reserves could have changed
@@ -273,6 +279,13 @@ export function handleSync(event: Sync): void {
   uniswap.save()
   token0.save()
   token1.save()
+
+  updatePairHourData(event)
+  //updateUniswapDayData(event)
+  //updateTokenDayData(token0 as Token, event)
+  //updateTokenDayData(token1 as Token, event)
+  updateTokenHourData(token0 as Token, event)
+  updateTokenHourData(token1 as Token, event)
 }
 
 export function handleMint(event: Mint): void {
@@ -324,12 +337,12 @@ export function handleMint(event: Mint): void {
 
   // update day entities
   //updatePairDayData(event)
-  updatePairHourData(event)
+  //updatePairHourData(event)
   //updateUniswapDayData(event)
   //updateTokenDayData(token0 as Token, event)
   //updateTokenDayData(token1 as Token, event)
-  updateTokenHourData(token0 as Token, event)
-  updateTokenHourData(token1 as Token, event)
+  //updateTokenHourData(token0 as Token, event)
+  //updateTokenHourData(token1 as Token, event)
 }
 
 export function handleBurn(event: Burn): void {
@@ -388,10 +401,10 @@ export function handleBurn(event: Burn): void {
 
   // update day entities
   //updatePairDayData(event)
-  updatePairHourData(event)
+  ///updatePairHourData(event)
   //updateUniswapDayData(event)
-  updateTokenHourData(token0 as Token, event)
-  updateTokenHourData(token1 as Token, event)
+  //updateTokenHourData(token0 as Token, event)
+  //updateTokenHourData(token1 as Token, event)
 }
 
 export function handleSwap(event: Swap): void {
@@ -504,6 +517,7 @@ export function handleSwap(event: Swap): void {
   transaction.swaps = swaps
   transaction.save()
 
+  /*
   // update day entities
   //let pairDayData = updatePairDayData(event)
   let pairHourData = updatePairHourData(event)
@@ -544,4 +558,5 @@ export function handleSwap(event: Swap): void {
     amount1Total.times(token1.derivedETH as BigDecimal).times(bundle.ethPrice)
   )
   token1HourData.save()
+  */
 }

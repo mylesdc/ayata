@@ -1,6 +1,6 @@
 {
   "name": "ayata",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "repository": "https://github.com/mylesdc/ayata",
   "license": "GPL-3.0-or-later",
   "scripts": {
@@ -9,12 +9,13 @@
     "create-local": "graph create mylesdc/ayata --node http://127.0.0.1:8020",
     "deploy-local": "graph deploy mylesdc/ayata --debug --ipfs http://localhost:5001 --node http://127.0.0.1:8020",
     "deploy": "graph deploy mylesdc/ayata --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/ --access-token 894554ecf95a46aa9c870b32b722df76 --debug",
+    "deploy-studio": "graph deploy mylesdc/ayata --ipfs https://api.thegraph.com/ipfs/ --node https://api.studio.thegraph.com/deploy/ --access-token 1c5c724c790aa7e8f8d9c730decd2f21 --debug",
     "deploy-staging": "graph deploy $THE_GRAPH_GITHUB_USER/$THE_GRAPH_SUBGRAPH_NAME /Uniswap --ipfs https://api.staging.thegraph.com/ipfs/ --node https://api.staging.thegraph.com/deploy/",
-    "watch-local": "graph deploy graphprotocol/Uniswap2 --watch --debug --node http://127.0.0.1:8020/ --ipfs http://localhost:5001"
+    "watch-local": "graph deploy mylesdc/ayata --watch --debug --node http://127.0.0.1:8020/ --ipfs http://localhost:5001"
   },
   "devDependencies": {
-    "@graphprotocol/graph-cli": "^0.16.0",
-    "@graphprotocol/graph-ts": "^0.16.0",
+    "@graphprotocol/graph-cli": "^0.18.0",
+    "@graphprotocol/graph-ts": "^0.18.0",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
     "eslint": "^6.2.2",
